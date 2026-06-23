@@ -1,4 +1,4 @@
-name: Build APK YML Only
+name: Build APK Webview Murni
 
 on:
   push:
@@ -16,15 +16,27 @@ jobs:
       with:
         node-version: '20'
 
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
     - name: Install dependencies
       run: npm install
 
-    - name: Build Android App (Pake Action Temuan Lu)
-      uses: Narottam04/action-capacitor-android@v1.0.0
+    - name: Generate Folder Android Otomatis
+      # Di sini letak keajaibannya, GitHub bakal bikin folder android di awan
+      run: npx cap add android
+
+    - name: Build APK
+      working-directory: ./android
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleRelease
 
     - name: Upload Hasil APK
       uses: actions/upload-artifact@v4
       with:
         name: APK-Topup-Jadi
-        # Pakai tanda bintang (**) biar dia nyari semua file APK yang dihasilkan
-        path: android/app/build/outputs/apk/**/*.apk
+        path: android/app/build/outputs/apk/release/app-release-unsigned.apk

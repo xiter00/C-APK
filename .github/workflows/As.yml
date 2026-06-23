@@ -1,4 +1,4 @@
-name: Build APK Webview Murni
+name: Build APK Capacitor Tulen
 
 on:
   push:
@@ -22,21 +22,21 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Install dependencies
+    - name: Install dependencies Capacitor
       run: npm install
 
-    - name: Generate Folder Android Otomatis
-      # Di sini letak keajaibannya, GitHub bakal bikin folder android di awan
+    - name: Bikin Folder Android Pake Capacitor
       run: npx cap add android
 
-    - name: Build APK
+    - name: Build APK Debug (Biar Langsung Bisa Di-install)
       working-directory: ./android
       run: |
         chmod +x gradlew
-        ./gradlew assembleRelease
+        ./gradlew assembleDebug
 
-    - name: Upload Hasil APK
+    - name: Upload Hasil APK Capacitor
       uses: actions/upload-artifact@v4
       with:
-        name: APK-Topup-Jadi
-        path: android/app/build/outputs/apk/release/app-release-unsigned.apk
+        name: APK-Topup-Bisa-Diinstall
+        path: android/app/build/outputs/apk/debug/app-debug.apk
+        

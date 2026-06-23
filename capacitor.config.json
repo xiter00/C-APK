@@ -1,0 +1,9 @@
+{
+  "appId": "com.domainlu.topup",
+  "appName": "TopupKu",
+  "webDir": "www",
+  "server": {
+    "url": "https://xiter00.site.je/andyshop/",
+    "cleartext": true
+  }
+}
